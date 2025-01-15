@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HehelifeProject.Views.InventoryPage"
+             xmlns:models="clr-namespace:HehelifeProject.Models"
+             Title="InventoryPage">
+    <Grid RowDefinitions="70, *, 50" VerticalOptions="Start">
+        <!-- Titel en Info -->
+        <VerticalStackLayout Grid.Row="0">
+            <Label Text="Onze Auto Inventaris"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   FontFamily="TahomaBold"
+                   FontSize="Large"
+                   TextColor="White" />
+            <Label Text="{Binding SortedBy}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   FontFamily="Tahoma"
+                   FontSize="Small"
+                   TextColor="LightGray" />
+            <Label Text="{Binding Info}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   FontFamily="Tahoma"
+                   FontSize="Small"
+                   TextColor="LightGray" />
+        </VerticalStackLayout>
+
+        <!-- Auto lijst -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding QueriedCars}"
+                        SelectedItem="{Binding SelectedCar}"
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding ItemClickedCommand}"
+                        SelectionChangedCommandParameter="{Binding .}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Car">
+                    <Border BackgroundColor="#333333" Stroke="White" Margin="10,0" Padding="5" StrokeThickness="3">
+                        <HorizontalStackLayout>
+                            <Image Source="{Binding ImageUrl}" WidthRequest="96" HeightRequest="64" Aspect="AspectFit" />
+                            <VerticalStackLayout Margin="10,0">
+                                <Label Text="{Binding Brand}" FontFamily="TahomaBold" FontSize="18" TextColor="White" />
+                                <Label Text="{Binding Model}" FontFamily="Tahoma" FontSize="16" TextColor="LightGray" />
+                                <Label Text="{Binding Mileage, StringFormat='{} {0:N0} km'}" FontFamily="Tahoma" FontSize="14" TextColor="LightGray" />
+                                <Label Text="{Binding Price, StringFormat='{} € {0:N2}'}" FontFamily="TahomaBold" FontSize="16" TextColor="DarkGoldenrod" />
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Text="Geen producten gevonden"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           TextColor="White" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+        </CollectionView>
+
+        <!-- Actieknoppen -->
+        <HorizontalStackLayout Spacing="20" Grid.Row="2" HorizontalOptions="Center">
+            <Button Text="Vernieuwen"
+                    Command="{Binding RefreshCommand}"
+                    BackgroundColor="DarkGoldenrod"
+                    TextColor="White"
+                    WidthRequest="145"
+                    HeightRequest="40" />
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

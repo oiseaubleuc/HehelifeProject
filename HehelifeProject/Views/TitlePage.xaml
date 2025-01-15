@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HehelifeProject.Views.TitlePage"
+             Title="Hehelife Car App"
+             BackgroundColor="Black"
+             Shell.BackgroundColor="Black">
+
+    <VerticalStackLayout Margin="20,10" Spacing="10" VerticalOptions="Start">
+        <!-- Logo -->
+        <Image Source="audi.jpg" WidthRequest="320" Aspect="AspectFit" HeightRequest="320" />
+
+        <!-- Welkom Label -->
+        <Label Text="Welcome to Hehelife Car App" 
+               TextColor="White" 
+               Margin="20,20,0,0" 
+               HorizontalOptions="Start" 
+               FontFamily="TahomaBold" 
+               FontSize="Small" />
+
+        <!-- Knoppen -->
+        <HorizontalStackLayout Spacing="15" HorizontalOptions="Center" Margin="0,10">
+            <Button Text="View Inventory" 
+                    BackgroundColor="DarkGoldenrod" 
+                    TextColor="White" 
+                    FontFamily="TahomaBold" 
+                    FontSize="Small"
+                    HorizontalOptions="Center" 
+                    WidthRequest="160" 
+                    HeightRequest="40" 
+                    Command="{Binding ViewInventoryCommand}" />
+
+            <Button Text="+" 
+                    BackgroundColor="Gray" 
+                    TextColor="White" 
+                    FontFamily="TahomaBold" 
+                    FontSize="Small"
+                    HorizontalOptions="Center" 
+                    WidthRequest="50" 
+                    HeightRequest="40" 
+                    Command="{Binding GoAddPageCommand}" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
